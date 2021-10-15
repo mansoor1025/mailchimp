@@ -60,7 +60,7 @@ class ContactController extends Controller
 
     public function export_to_mail_chimp(){
        
-        $export_email = DB::table('contact_list')->where('export_email',0)->get();
+        $export_email = Contact::where('export_email',0)->get();
         foreach($export_email as $value){
             $data['export_email'] = 1;
             Contact::where('email',$value->email)->update($data);
