@@ -24,8 +24,7 @@ class ContactController extends Controller
             'last_name' => $request->last_name,
             'pin_code' => $request->pin_code,
             'phone_number' => $request->phone_number,
-            'address' => $request->address,
-            'last_name' => $request->last_name,
+            'address' => $request->address
         ]);
 
         event(new UserRegistered($ContactList));
