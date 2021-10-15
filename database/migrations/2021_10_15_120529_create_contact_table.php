@@ -23,8 +23,6 @@ class CreateContactTable extends Migration
             $table->string('address')->length(100);
             $table->integer('export_email')->default(0);
             $table->integer('status')->default(1);
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
         });
     }
 
