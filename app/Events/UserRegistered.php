@@ -9,7 +9,7 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use App\ContactList;
+use App\Contact;
 
 class UserRegistered
 {
@@ -22,7 +22,7 @@ class UserRegistered
      */
     public $email;
 
-    public function __construct(ContactList $email)
+    public function __construct(Contact $email)
     {
         $this->email = $email;
     }

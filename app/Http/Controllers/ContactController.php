@@ -6,19 +6,19 @@ use Illuminate\Http\Request;
 use DB;
 use App\jobs\newUserExportMailChimp;
 use App\Events\UserRegistered;
-use App\ContactList;
+use App\Contact;
 use Auth;
 
-class contact_controller extends Controller
+class ContactController extends Controller
 {
     public function contact_list(){
-       $contact_list = DB::table('contact_list')->where('status',1)->orderBy('id','desc')->get();
+       $contact_list = Contact::where('status',1)->orderBy('id','desc')->get();
        return view('contact_list',compact('contact_list'));         
     }
 
     public function add_contact(Request $request){
 
-        $ContactList =  ContactList::create([
+        $ContactList =  Contact::create([
             'email' => $request->email,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -33,12 +33,12 @@ class contact_controller extends Controller
     }
 
     public function get_contact_list(){
-        $get_contact_list = DB::table('contact_list')->where('status',1)->orderBy('id','desc')->get();
+        $get_contact_list = Contact::where('status',1)->orderBy('id','desc')->get();
         return view('get_contact_list',compact('get_contact_list'));  
     }
 
     public function edit_contact_list(Request $request){
-        $edit_contact_list = DB::table('contact_list')->where([['status',1],['id',$request->id]])->first();
+        $edit_contact_list = Contact::where([['status',1],['id',$request->id]])->first();
         return json_encode($edit_contact_list);
     }
 
@@ -49,12 +49,12 @@ class contact_controller extends Controller
        $data['phone_number']  = $request->phone_number;
        $data['pin_code']  = $request->pin_code;
        $data['address']  = $request->address;
-       DB::table('contact_list')->where('id',$request->id)->update($data);
+       Contact::where('id',$request->id)->update($data);
        echo 'update successfully'; 
     }
 
     public function delete_contact_list(Request $request){
-        DB::table('contact_list')->where('id',$request->id)->delete();
+        Contact::where('id',$request->id)->delete();
         echo 'Delete Successfully';
     }
 
@@ -63,7 +63,7 @@ class contact_controller extends Controller
         $export_email = DB::table('contact_list')->where('export_email',0)->get();
         foreach($export_email as $value){
             $data['export_email'] = 1;
-            DB::table('contact_list')->where('email',$value->email)->update($data);
+            Contact::where('email',$value->email)->update($data);
         }
         echo 'export mailchimp successfully';
     }
