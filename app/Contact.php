@@ -16,7 +16,7 @@ class Contact extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'first_name', 'last_name','phone_number', 'pin_code','address', 'status','created_at',
+        'email', 'first_name', 'last_name','phone_number', 'pin_code','address', 'status'
     ];
 
     /**
