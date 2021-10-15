@@ -60,11 +60,17 @@ class ContactController extends Controller
     public function export_to_mail_chimp(){
        
         $export_email = Contact::where('export_email',0)->get();
-        foreach($export_email as $value){
-            $data['export_email'] = 1;
-            Contact::where('email',$value->email)->update($data);
+        if(count($export_email) > 0){
+            foreach($export_email as $value){
+                $data['export_email'] = 1;
+                Contact::where('email',$value->email)->update($data);
+            }
+            echo 'export mailchimp successfully';
         }
-        echo 'export mailchimp successfully';
+        else{
+            echo 'Contact is not available';
+        }
+        
     }
 
     public function logout(){
