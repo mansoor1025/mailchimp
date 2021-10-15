@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Contact extends Authenticatable
 {
     use Notifiable;
-    protected $table = 'contact_list';
+    protected $table = 'Contact';
     /**
      * The attributes that are mass assignable.
      *
